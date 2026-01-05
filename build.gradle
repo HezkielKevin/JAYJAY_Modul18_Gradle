@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.kevin'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'com.google.guava:guava:32.0.1-android'  // Library untuk utilitas umum (contoh Guava)
+    testImplementation 'junit:junit:4.13.1'            // Library untuk testing (JUnit, relevan untuk SQA)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('greetingTask') {
+    doLast {
+        String nama = project.hasProperty('nama') ? project.property('nama') : 'Gradle User'
+        println "Hello, $nama! Welcome to Gradle World!"
+    }
+    // use on CLI : ./gradlew greetingTask -Pnama=YourName
+}
